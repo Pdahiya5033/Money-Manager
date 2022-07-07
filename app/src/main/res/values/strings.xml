@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">MoneyManager</string>
+    <string name="splash_text">Your Money Manager</string>
+    <string name="income_input_btn">Income</string>
+    <string name="expense_input_btn">Expense</string>
+    <string name="transfer_input_btn">Transfer</string>
+    <string name="save_btn">Save</string>
+    <string name="continue_btn">Continue</string>
+    <string name="date_picker_title">New Record</string>
+    <string-array name="account">
+        <item>Cash</item>
+        <item>Accounts</item>
+        <item>Card</item>
+    </string-array>
+    <string-array name="category_expense">
+        <item>Food</item>
+        <item>Social Life</item>
+        <item>Culture</item>
+        <item>Gift</item>
+        <item>Health</item>
+        <item>Education</item>
+        <item>Beauty</item>
+    </string-array>
+    <string-array name="category_income">
+        <item>Allowance</item>
+        <item>Salary</item>
+        <item>Petty Cash</item>
+        <item>Bonus</item>
+        <item>Other</item>
+    </string-array>
+</resources>
