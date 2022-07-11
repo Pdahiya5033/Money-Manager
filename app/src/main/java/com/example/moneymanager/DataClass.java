@@ -1,14 +1,15 @@
 package com.example.moneymanager;
 
 import java.util.Date;
+import java.util.List;
 
 public class DataClass {
-    private Date date;
-    private String category;
-    private float catExp;
-    private float income;
-    private String notes;
-    private float incCat;
+    private String date;
+    private List<String> category;
+    private List<Float> catExp;
+    private List<Float> income;
+    private List<String> notes;
+    private List<String> incCat;
     private String account;
 
     public String getAccount() {
@@ -18,52 +19,79 @@ public class DataClass {
     public void setAccount(String account) {
         this.account = account;
     }
-
-    public float getIncCat() {
-        return incCat;
+    public int categorySize(){
+        return category.size();
+    }
+    public int incomeSize(){
+        return income.size();
+    }
+    public int catExpSize(){
+        return catExp.size();
+    }
+    public int incCatSize(){
+        return incCat.size();
+    }
+    public String getIncCat(int i) {
+        return incCat.get(i);
     }
 
-    public void setIncCat(float incCat) {
+    public void setIncCat(List<String> incCat) {
         this.incCat = incCat;
     }
-
-
-    public Date getDate() {
+    public List<String> retcatList(){
+        return category;
+    }
+    public List<Float> retCatExpList(){
+        return catExp;
+    }
+    public List<String> retNoteList(){
+        return notes;
+    }
+    public List<String> retIncCatList(){
+        return incCat;
+    }
+    public List<Float> retIncList(){
+        return income;
+    }
+    public String getDate() {
         return date;
     }
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public String getCategory() {
-        return category;
+    public String getCategory(int i) {
+        return category.get(i);
     }
 
-    public void setCategory(String category) {
+    public void setCategory(List<String> category) {
         this.category = category;
     }
 
-    public float getCatExp() {
-        return catExp;
+    public float getCatExp(int i) {
+        return catExp.get(i);
     }
 
-    public void setCatExp(float catExp) {
+    public void setCatExp(List<Float> catExp) {
         this.catExp = catExp;
     }
 
-    public float getIncome() {
-        return income;
+    public float getIncome(int i) {
+        return income.get(i);
     }
 
-    public void setIncome(float income) {
+    public void setIncome(List<Float> income) {
         this.income = income;
     }
 
-    public String getNotes() {
-        return notes;
+    public String getNotes(int i) {
+        return notes.get(i);
     }
 
-    public void setNotes(String notes) {
+    public void setNotes(List<String> notes) {
         this.notes = notes;
+    }
+    public int notesSize(){
+        return notes.size();
     }
 }

@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG="MainActivity";
     private ViewPager mViewPager;
     private FloatingActionButton addBtn;
-    private int index=0;
+    private boolean calendarClicked=false;
     private List<DataClass> dataClassList;
     private TextView dailyText,calendarText,weeklyText,monthlyText,totalText;
     @Override
@@ -62,6 +62,20 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Log.d(TAG,"daily clicked");
                 FragmentManager fm=getSupportFragmentManager();
+                if(calendarClicked){
+                    List<Fragment> fragments=getSupportFragmentManager().getFragments();
+                    if(fragments.size()>1){
+                        final Fragment currentFragment=getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+                        if(currentFragment!=null){
+                            getSupportFragmentManager().beginTransaction().remove(currentFragment).commit();
+                            getSupportFragmentManager().popBackStack();
+                        }
+                        else{
+                            MainActivity.super.onBackPressed();
+                        }
+                    }
+                }
+                calendarClicked=false;
                 mViewPager.setAdapter(new FragmentStatePagerAdapter(fm) {
                     @Override
                     public int getCount() {
@@ -79,14 +93,34 @@ public class MainActivity extends AppCompatActivity {
         calendarText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                calendarClicked=true;
+                mViewPager.removeAllViews();
                 Log.d(TAG,"calendar clicked");
-
+                FragmentManager fm=getSupportFragmentManager();
+                Fragment fragment=CalendarFragment.newInstance();
+                fm.beginTransaction().replace(R.id.fragment_container,fragment)
+                        .addToBackStack(null).commit();
             }
         });
         weeklyText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FragmentManager fm=getSupportFragmentManager();
+                if(calendarClicked){
+                    List<Fragment> fragments=getSupportFragmentManager().getFragments();
+                    if(fragments.size()>1){
+                        final Fragment currentFragment=getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+                        if(currentFragment!=null){
+                            getSupportFragmentManager().beginTransaction().remove(currentFragment).commit();
+                            getSupportFragmentManager().popBackStack();
+                        }
+                        else{
+                            MainActivity.super.onBackPressed();
+                        }
+                    }
+                }
+                calendarClicked=false;
+
                 mViewPager.setAdapter(new FragmentStatePagerAdapter(fm) {
                     @Override
                     public int getCount() {
@@ -123,8 +157,8 @@ public class MainActivity extends AppCompatActivity {
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 Fragment fr=getSupportFragmentManager().getFragments().get(index);
-                Log.d(TAG,">>>."+fr);
+                 //Fragment fr=getSupportFragmentManager().getFragments().get(index);
+                //Log.d(TAG,">>>."+fr);
                 Intent intent=DataInputActivity.newIntent(MainActivity.this);
                 startActivity(intent);
 

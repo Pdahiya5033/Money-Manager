@@ -35,14 +35,8 @@ public class DailyFragment extends Fragment {
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup viewGroup, Bundle savedInstanceState){
-        Log.d(TAG,">>>"+"inside on create view of daily");
+        Log.d(TAG,">>>"+"inside on create view of daily"+getContext());
         View view=inflater.inflate(R.layout.daily_tab,viewGroup,false);
-        //dailyVPAdapter=new DailyVPAdapter(dataList);
-//        viewPager.setAdapter(dailyAdapter);
-//        viewPager.setClipToPadding(false);
-//        viewPager.setClipChildren(false);
-//        viewPager.setOffscreenPageLimit(2);
-//        viewPager.getChildAt(0).setOverScrollMode(View.OVER_SCROLL_NEVER);
         mRecyclerView=view.findViewById(R.id.daily_tab_recView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         dailyAdapter=new DailyAdapter(getContext(),dataList);
