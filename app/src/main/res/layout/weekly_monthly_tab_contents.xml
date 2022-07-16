@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-<!--        only below text view is to be changed-->
         <TextView
-            android:layout_width="130dp"
-            android:layout_height="50dp"
-            android:text="week"
-            android:paddingTop="13dp"
-            android:paddingLeft="5dp"
-            android:id="@+id/weekly_tab_days"/>
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="weeks"
+            android:textAlignment="center"
+            android:layout_weight="1"
+            android:id="@+id/weeks_in_weekly"/>
         <TextView
-            android:layout_width="130dp"
-            android:layout_height="50dp"
-            android:text="income"
-            android:paddingTop="13dp"
-            android:paddingLeft="5dp"
-            android:id="@+id/weekly_tab_income"/>
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="weeks"
+            android:textAlignment="center"
+            android:layout_weight="1"
+            android:id="@+id/income_in_weekly"/>
         <TextView
-            android:layout_width="140dp"
-            android:layout_height="50dp"
-            android:text="expense"
-            android:paddingTop="13dp"
-            android:paddingLeft="5dp"
-            android:id="@+id/weekly_tab_expense"/>
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="weeks"
+            android:textAlignment="center"
+            android:layout_weight="1"
+            android:id="@+id/expense_in_weekly"/>
     </LinearLayout>
 </RelativeLayout>

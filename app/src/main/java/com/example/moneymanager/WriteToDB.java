@@ -41,7 +41,6 @@ public class WriteToDB {
         contentValues.put(DBSchema.DataTable.DataColumns.DATE,dc.getDate());
         String str="";
         str=String.join(",",dc.retcatList());
-
         Log.d(TAG,">>........0"+str);
         contentValues.put(DBSchema.DataTable.DataColumns.CATEGORY,str);
         list =dc.retCatExpList();

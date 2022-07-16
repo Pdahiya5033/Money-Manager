@@ -19,6 +19,8 @@ import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,20 +29,21 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton addBtn;
     private boolean calendarClicked=false;
     private List<DataClass> dataClassList;
-    private TextView dailyText,calendarText,weeklyText,monthlyText,totalText;
+    private LocalDate localDate;
+    private TextView dailyText,calendarText,weeklyText,monthlyText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        localDate=LocalDate.now();
         dataClassList=WriteToDB.getDB(getApplicationContext()).getDCObjDB();
         getSupportActionBar().hide();
         addBtn=findViewById(R.id.addButton);
-        mViewPager=(ViewPager) findViewById(R.id.homesrc_viewpager);
+        mViewPager=findViewById(R.id.homesrc_viewpager);
         dailyText=findViewById(R.id.daily_text_activity_main);
         weeklyText=findViewById(R.id.weekly_text_activity_main);
         calendarText=findViewById(R.id.calendar_text_activity_main);
         monthlyText=findViewById(R.id.monthly_text_activity_main);
-        totalText=findViewById(R.id.total_text_activity_main);
         if(savedInstanceState==null){
             FragmentManager fm=getSupportFragmentManager();
             mViewPager.setAdapter(new FragmentStatePagerAdapter(fm) {
@@ -120,17 +123,17 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
                 calendarClicked=false;
-
                 mViewPager.setAdapter(new FragmentStatePagerAdapter(fm) {
                     @Override
                     public int getCount() {
-                        return dataClassList.size();
+                        return 12;
                     }
-
                     @NonNull
                     @Override
                     public Fragment getItem(int position) {
-                        return WeeklyFragment.newInstance(dataClassList.get(position));
+                        Month month=Month.of(position+1);
+                        LocalDate ld=LocalDate.of(localDate.getYear(),month,1);
+                        return WeeklyFragment.newInstance(ld);
                     }
                 });
             }
@@ -144,15 +147,7 @@ public class MainActivity extends AppCompatActivity {
                         .addToBackStack(null).commit();
             }
         });
-        totalText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentManager fm=getSupportFragmentManager();
-                Fragment fragment=TotalFragment.newInstance();
-                fm.beginTransaction().replace(R.id.fragment_container,fragment,"daily").setReorderingAllowed(true)
-                        .addToBackStack(null).commit();
-            }
-        });
+
         Log.d(TAG,"inside onCreate Main activity");
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override

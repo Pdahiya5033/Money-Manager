@@ -3,6 +3,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/fragment_for_weekly_tab">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="130dp"
+            android:layout_height="50dp"
+            android:text="week"
+            android:textAlignment="center"
+            android:paddingTop="13dp"
+            android:paddingLeft="5dp"
+            android:id="@+id/weekly_tab_days"/>
+        <TextView
+            android:layout_width="130dp"
+            android:layout_height="50dp"
+            android:text="income"
+            android:textAlignment="center"
+            android:paddingTop="13dp"
+            android:paddingLeft="5dp"
+            android:id="@+id/weekly_tab_income"/>
+        <TextView
+            android:layout_width="140dp"
+            android:layout_height="50dp"
+            android:text="expense"
+            android:textAlignment="center"
+            android:paddingTop="13dp"
+            android:paddingLeft="5dp"
+            android:id="@+id/weekly_tab_expense"/>
+    </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
