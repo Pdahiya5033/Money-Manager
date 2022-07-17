@@ -86,6 +86,28 @@ public class WriteToDB {
                 whereClause,whereArgs,null,null,null);
         return new AccessDBData(cursor);
     }
+    public List<String> getWeeksCont(String[] whereArg){
+        List<String> l=new ArrayList<>();
+        AccessDBData accessDBData=queryForWeeksTab(whereArg);
+        Log.d(TAG,"////"+accessDBData.getPosition());
+        accessDBData.moveToFirst();
+        try{
+            for(int i=0;i<accessDBData.getCount();i++){
+                l.add(accessDBData.getIncExpDB());
+                accessDBData.moveToNext();
+            }
+        }finally {
+            accessDBData.close();
+        }
+
+        return l;
+    }
+    private AccessDBData queryForWeeksTab(String[] whereArgs){
+        String[] cols={DBSchema.DataTable.DataColumns.CATEXPENSE};
+        Cursor cursor=sqLiteDatabase.query(DBSchema.DataTable.NAME,cols,
+                DBSchema.DataTable.DataColumns.DATE+" BETWEEN ? AND ?",new String[]{"01/02/2021","03/02/2021"},null,null,null);
+        return new AccessDBData(cursor);
+    }
 //    public void deleteData(String note){
 //        //sqLiteDatabase.delete(DBSchema.DataTable.NAME,NOTE+"=?",new String[]{note});
 //

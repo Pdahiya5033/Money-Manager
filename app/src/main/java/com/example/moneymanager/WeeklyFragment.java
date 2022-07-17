@@ -40,6 +40,8 @@ public class WeeklyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup viewGroup,Bundle savedInstanceState){
         View view=inflater.inflate(R.layout.weekly_tab,viewGroup,false);
         listObj.add(dataClass);
+
+
         weeksInMonth=getWeeksList(selectedDate);
         mRecyclerView=view.findViewById(R.id.weekly_tab_recView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

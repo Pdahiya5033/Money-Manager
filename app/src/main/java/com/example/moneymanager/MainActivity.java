@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -26,10 +27,11 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG="MainActivity";
     private ViewPager mViewPager;
-    private FloatingActionButton addBtn;
+    private FloatingActionButton addBtn,chatBtn;
     private boolean calendarClicked=false;
     private List<DataClass> dataClassList;
     private LocalDate localDate;
+    private ImageView pieImage;
     private TextView dailyText,calendarText,weeklyText,monthlyText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +40,9 @@ public class MainActivity extends AppCompatActivity {
         localDate=LocalDate.now();
         dataClassList=WriteToDB.getDB(getApplicationContext()).getDCObjDB();
         getSupportActionBar().hide();
+        chatBtn=findViewById(R.id.chat_btn);
         addBtn=findViewById(R.id.addButton);
+        pieImage=findViewById(R.id.pie_img);
         mViewPager=findViewById(R.id.homesrc_viewpager);
         dailyText=findViewById(R.id.daily_text_activity_main);
         weeklyText=findViewById(R.id.weekly_text_activity_main);
@@ -131,6 +135,10 @@ public class MainActivity extends AppCompatActivity {
                     @NonNull
                     @Override
                     public Fragment getItem(int position) {
+                        String[] strings={"01/02/2021"};
+                        List<String> list=WriteToDB.getDB(getApplicationContext()).getWeeksCont(strings);
+                        for(int i=0;i<list.size();i++)
+                            Log.d(TAG,";;;;;"+list.get(i));
                         Month month=Month.of(position+1);
                         LocalDate ld=LocalDate.of(localDate.getYear(),month,1);
                         return WeeklyFragment.newInstance(ld);
@@ -157,6 +165,36 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent=DataInputActivity.newIntent(MainActivity.this);
                 startActivity(intent);
 
+            }
+        });
+        chatBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=ChatsActivity.newIntent(MainActivity.this);
+                startActivity(intent);
+            }
+        });
+        pieImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm=getSupportFragmentManager();
+                if(calendarClicked){
+                    List<Fragment> fragments=getSupportFragmentManager().getFragments();
+                    if(fragments.size()>1){
+                        final Fragment currentFragment=getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+                        if(currentFragment!=null){
+                            getSupportFragmentManager().beginTransaction().remove(currentFragment).commit();
+                            getSupportFragmentManager().popBackStack();
+                        }
+                        else{
+                            MainActivity.super.onBackPressed();
+                        }
+                    }
+                }
+                calendarClicked=false;
+                Fragment fragment=ChartFragment.newInstance();
+                fm.beginTransaction().add(R.id.fragment_container,fragment)
+                        .addToBackStack(null).commit();
             }
         });
     }

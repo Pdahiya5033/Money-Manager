@@ -99,4 +99,8 @@ public class AccessDBData extends CursorWrapper {
         dataClass.setNotes(notesList);
         return dataClass;
     }
+    public String getIncExpDB(){
+        String income=getString(getColumnIndex(DBSchema.DataTable.DataColumns.CATEXPENSE));
+        return income;
+    }
 }
